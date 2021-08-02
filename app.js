@@ -1,59 +1,65 @@
-// Task 1 
-for (i = 1; i <= 10; i++) {
-    if (i % 3 === 0) {
-        console.log('FizBuz');
-    } else if (i % 2 === 0) {
-        console.log('Fiz');
-    } else {
-        console.log('Buz');
-    }
+// Task 1
+
+const citiesAndCountries = {
+	'Киев': 'Украина',
+	'Нью-Йорк': 'США',
+	'Амстердам': 'Нидерланды',
+	'Берлин': 'Германия',
+	'Париж': 'Франция',
+	'Лиссабон': 'Португалия',
+	'Вена': 'Австрия',
+};
+
+let arr = [];
+for (let property in citiesAndCountries) {
+    arr.push(property + ' - ' + citiesAndCountries[property])
 }
+console.log(arr);
 
 // Task 2 
 
-function factorial(n) {
-    return (n != 1) ? n * factorial(n - 1) : 1;
+function getArray(){
+    let array2 = [];
+    const amount = 9;
+    for (i = 1; i <= amount; i++) {
+        array2.push(i);
+    } return array2
 }
 
-factorial(10);
+// Task 3
 
-// Task 3 
+const namesOfDays = {
+    ru: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'],
+    en: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+}
+let dayName = '';
+const lang = 'ru';
+const day = 7;
 
-const sheetsInReamPaper = 500;
-const consumptionPerWeek = 1200;
-const weeksAmount = 8;
-
-const paperAmount = (weeksAmount) => {
-    const paperForWeeks = weeksAmount * consumptionPerWeek;
-    const amountPaperPacks = paperForWeeks / sheetsInReamPaper - (paperForWeeks % sheetsInReamPaper / sheetsInReamPaper) + 1;
-    return amountPaperPacks;
-} 
+function getNameOfDay(day, lang) {
+	for (let key in namesOfDays.ru) {
+			if (key == day - 1) {
+				dayName = namesOfDays.ru[key];
+			}
+	}
+	return dayName;
+}
 
 // Task 4 
 
-const roomsOnFloor = 3;
-const floors = 9;
-const roomNumber = 27
+let b = [12, 898, 899, 900];
+let min1 = b[0];
+let min2 = b[1];
 
-const roomInPorch = roomsOnFloor * floors;
-
-
-const findPorch = (roomNumber) => {
-    const porch = roomNumber / roomInPorch - (roomNumber % roomInPorch / roomInPorch) + 1;
-    if (roomNumber % roomInPorch === 0) return roomNumber / roomInPorch;
-    return porch;
+const sumOfMin = () => {
+	for (let i = 2; i < b.length; i++) {
+		if (b[i] < min1) {
+			min1 = b[i];
+		} else {
+			if (b[i] < min2) {
+				min2 = b[i]
+			}
+		}
+	}
+	return min1 + min2
 }
-
-const findFloor = (roomNumber) => {
-    const floor = (roomNumber - 1) % roomInPorch / roomsOnFloor - ((roomNumber - 1) % roomInPorch % roomsOnFloor / roomsOnFloor) + 1;
-    return floor;
-}
-
-const porchAndFloor = (roomNumber) => {
-    findFloor(roomNumber);
-    findPorch(roomNumber);
-
-    return 'Porch: ' + findPorch(roomNumber) + ', ' + 'floor: ' + findFloor(roomNumber);
-}
-
-// Task 5
