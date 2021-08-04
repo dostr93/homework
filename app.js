@@ -17,14 +17,23 @@ for (let property in citiesAndCountries) {
 console.log(arr);
 
 // Task 2 
+let r = 9;
+const arrInArr = () => {
+	const mainArr = []
+	let insideArr = [];
+	for (let i = 1; i <= r; i++) {
+		if(i % 3 === 0) {
+			insideArr[insideArr.length] = i;
+			mainArr[mainArr.length] = insideArr;
+			insideArr = [];
+			continue
+		}
+		insideArr[insideArr.length] = i;
+	}
+	return mainArr;
+} 
+	console.log(arrInArr());
 
-function getArray(){
-    let array2 = [];
-    const amount = 9;
-    for (i = 1; i <= amount; i++) {
-        array2.push(i);
-    } return array2
-}
 
 // Task 3
 
@@ -32,18 +41,13 @@ const namesOfDays = {
     ru: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'],
     en: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
 }
-let dayName = '';
+
 const lang = 'ru';
 const day = 7;
 
-function getNameOfDay(day, lang) {
-	for (let key in namesOfDays.ru) {
-			if (key == day - 1) {
-				dayName = namesOfDays.ru[key];
-			}
-	}
-	return dayName;
-}
+const getNameOfDay = (lang, day) => namesOfDays[lang][day - 1];
+
+// getNameOfDay();
 
 // Task 4 
 
@@ -62,4 +66,15 @@ const sumOfMin = () => {
 		}
 	}
 	return min1 + min2
+}
+
+// Task 5 
+const a = (arr) => {
+	let result = 0;
+	let counter = 1;
+	for (let i = arr.length; i > 0; i--) {
+		arr[i] === 1 ? result += counter : result;
+		counter *= 2
+	}
+	return result
 }
