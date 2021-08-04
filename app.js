@@ -72,7 +72,7 @@ const sumOfMin = () => {
 const a = (arr) => {
 	let result = 0;
 	let counter = 1;
-	for (let i = arr.length; i > 0; i--) {
+	for (let i = arr.length - 1; i >= 0; i--) {
 		arr[i] === 1 ? result += counter : result;
 		counter *= 2
 	}
