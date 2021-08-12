@@ -1,72 +1,99 @@
-// // Task 1 
+//  Task 1 
 
-function Employee(employee) {
-	this.id = employee.id;
-	this.name = employee.name;
-	this.surname = employee.surname;
-	this.salary = employee.salary;
-	this.workExperience = employee.workExperience;
-	this.isPrivileges = employee.isPrivileges;
-	this.gender = employee.gender;
+
+class Student {
+	constructor(enrollee) {
+		this.id = Student.getId();
+		this.name = enrollee.name;
+		this.surname = enrollee.surname;
+		this.raitingPoint = enrollee.raitingPoint;
+		this.schoolPoint = enrollee.schoolPoint;
+		this.isSelfPayment = Student.getPayment(this);
+	}
+	
+	static listOfStudents = [];
+
+	static sortOfStudents(arr) {
+		return arr.sort((a, b) => {
+			if (b.ratingPoint === a.ratingPoint) {
+				return b.schoolPoint - a.schoolPoint;
+			} else {
+				return b.ratingPoint - a.ratingPoint
+			};
+		});	
+	};
+
+	static id = 1; 
+
+	static getId() {
+		return this.id++
+	}
+
+	static getPayment(student) {
+		this.sortOfStudents(this.listOfStudents);
+		this.listOfStudents.push(student);
+		
+		for (let i = 0; i < this.listOfStudents.length; i++) {
+			if (i <= 4 && this.listOfStudents[i].ratingPoint >= 800) {
+				this.listOfStudents[i].isSelfPayment = true;
+            } else {
+                this.listOfStudents[i].isSelfPayment = false;
+            }
+        }
+
+        return true;
+    }
+    
+    get listOfStudents() {
+        return this.listOfStudents;
+    }
+};
+
+for (let i = 0; i < studentArr.length; i++) {
+	new Student(studentArr[i])
 }
-
-const employeeObj = new Employee(employeeArr[0]);
 
 // Task 2 
 
-Employee.prototype.getFullName = function() {
-	return `${this.surname} ${this.name}`; 
+class CustomString {
+
+	constructor(word) {
+		this.word = word
+	}
+	
+	reverse(word) {
+		let reverseResult = '';
+		for (let i = word.length - 1; i >= 0; i--) {
+			reverseResult += word[i]
+		}
+
+		return reverseResult;
+	}	
+
+	ucFirst(word) {
+		let uppercase = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+		let lowcase = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+		let letter = '';
+
+		
+
+		for (let i = 0; i < lowcase.length; i++) {
+			if (word[0] == lowcase[i]) {
+				letter = uppercase[i];
+			}
+		} return letter + word.slice(1);
+	} 
+
+	ucWords(words) {
+		let firstLetters = '';
+		for (let i = 0; i < words.length; i++) {
+			if (words[i - 1] === ' ' || i === 0) {
+				firstLetters += words[i].toUpperCase();
+			} else {
+				firstLetters += words[i]
+			}
+		} return firstLetters;
+	}
 }
 
-console.log(employeeObj.getFullName());
-
-// Task 3 
-
-let createEmployesFromArr = (arr) => {
-	return arr.map(item => {
-		return new Employee(item)
-	});
-};
-    
-const employeeConstructArr = createEmployesFromArr(employeeArr)
-
-// Task 4 
-
-const getFullNamesFromArr = (arr) => {
-	return arr.map(item => {
-		return item.getFullName()
-	})
-}
-	
-getFullNamesFromArr(employeeConstructArr) 
-
-// Task 5
-
-const getMiddleSalary = (arr) => {
-	const totalSalary = arr.map(item => item.salary).reduce((prev, item) => (prev + item));
-	const middleSalary = totalSalary / arr.length;
-	return Math.round(middleSalary);
-};
-
-getMiddleSalary(employeeConstructArr);
-
-// Task 6 
-
-const getRandomEmployee = (arr) => {
-	const randomEmployee = Math.floor(Math.random() * arr.length);
-	return arr[randomEmployee];
-};
-	
-getRandomEmployee(employeeConstructArr);
-
-//Task 7
-
-// Создаем экземпляр на основе объекта 
-// который берем из массива по 0 индексу
-
-const employeeObjTask7 = new Employee(employeeArr[0]);
-
-
-employeeObjTask7.fullInfo
-// Результат
-//  id - 1, name - Денис, surname - Хрущ
+const myString = new CustomString();
