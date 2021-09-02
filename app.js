@@ -1,6 +1,7 @@
 
 
 
+
 const arr = ['Vasya', 'Petya', 'Alexey'];
 
 function removeUser(array, index) {
@@ -14,37 +15,62 @@ console.log(arr);
 // Task2
 
 const obj = { name: 'Vasya', age: 1}
-const arr2 = [];
+
 function getAllKeys(obj) {
-    for (let key in obj) {
-        arr2.push(key)
-    } 
-    return arr2;
+    return Object.keys(obj);
     
 }
 
 getAllKeys(obj);
 
-console.log(arr2);
-
 // Task 3
 
 const obj3 = { name: 'Vasya', age: 1}
-const arr3 = [];
+
 function getAllValues(obj3) {
-    for (let key in obj3) {
-        arr3.push(obj3[key])
-    } 
-    return arr3;
+    return Object.values(obj3)
     
 }
 
 getAllValues(obj3);
 
-console.log(arr3);
-
 // Task 4
 
+const obj = {
+    id: 3,
+    name: 'Vasya'
+}
+
+const secondObj = {
+    id: 4,
+    name: 'Katya'
+}
+
+const arr = [
+    {
+        id: 1,
+        name: 'Kolya'
+    },
+    {
+        id: 2,
+        name: 'Petya'
+    },
+];
+
+const insertIntoarr = (obj, index) => {
+
+    if (index >= 1) {
+        arr.splice(index - 1, 0, obj);
+    } else {
+        console.log('Error')
+    }
+}
+
+insertIntoarr(obj, 2)
+console.log(arr)
+
+insertIntoarr(secondObj, 1)
+console.log(arr)
 
 // Task6
 function getCompanyName() {
