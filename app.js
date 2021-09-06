@@ -40,7 +40,18 @@ const sortCandidatesArr = sortBy => {
 
 // Task 4 
 
-const getEyeColorMap = () => {
-    const obj = {};
-    for (let i = 0; i < condidateArr.length; i++) {}
-}
+console.log(condidateArr);
+
+const eyesColors = condidateArr
+    .map(cand => cand.eyeColor)
+    .filter((cand, i, arr) => arr.indexOf(cand) === i);
+
+const result = condidateArr.reduce((acc, candidate) => {
+    acc[candidate.eyeColor] = condidateArr.filter(cand => cand.eyeColor === candidate.eyeColor);
+    return acc;
+}, {});
+
+console.log(result);
+
+
+
