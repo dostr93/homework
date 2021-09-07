@@ -1,4 +1,4 @@
-Task1
+// Task1
 
 const enteredNumber = prompt('Enter the number');
 const button = document.querySelector('.button');
@@ -14,11 +14,7 @@ for (i = 1; i <= Number(enteredNumber); i++) {
     
     button.before(input);
     
-    if (enteredNumber === i) {
-        input.classList.add()
-    }
-    
-    if (!(i % 2 )) {
+    if (i % 2 ) {
         input.classList.add('input-background');
     }
 
@@ -42,7 +38,10 @@ startBtn.addEventListener('click', () => {
     Id = setInterval(timer, 1000);
     return
 });
-stopBtn.addEventListener('click', () => clearInterval(Id));
+stopBtn.addEventListener('click', () => {
+    clearInterval(Id);
+    return
+});
     
 let timer = function() {
     const time = document.querySelector('h2')
@@ -77,7 +76,7 @@ colorRed()
 footerDown()
 
 
-// Task 4
+// // Task 4
 
 const INGREDIENTS = {
     "cocoa": ["cocoa powder", "milk", "sugar"],
@@ -86,3 +85,19 @@ const INGREDIENTS = {
     "matcha frappe": ["matcha", "milk", "ice"]
     };
     
+const menu = document.querySelector('#menu');
+menu.onclick = function(event) {
+    const orderedList = document.createElement('ol')
+    const recepie = INGREDIENTS[event.target.innerText];
+    if (recepie) {
+        recepie.forEach(element => {
+            let li = document.createElement('li');
+            li.innerText = element;
+            orderedList.append(li)
+        });
+
+        event.target.append(orderedList)
+    } else {
+        if (event.target.querySelector('ol')) event.target.querySelector('ol').remove()
+    }
+}
