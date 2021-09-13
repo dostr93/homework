@@ -1,103 +1,122 @@
 // Task1
 
-const enteredNumber = prompt('Enter the number');
-const button = document.querySelector('.button');
+const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        let number = Math.floor(Math.random() * 6) + 1;
+        console.log(number)
+        if (number <= 5) {
+            resolve(number);
+            
+        } else if (number === 6) {
+            reject(Errrrroorrrrrr);
+        }
+    }, 2000)
+    
+});
 
-for (i = 1; i <= Number(enteredNumber); i++) {
-    
-    let input = document.createElement('input')
-    input.value = `Input ${i}`;
-
-    
-    if (!(i % 3)) input.value = 'Some text';
-    input.classList.add('input-item');
-    
-    button.before(input);
-    
-    if (i % 2 ) {
-        input.classList.add('input-background');
-    }
-
-    if (i === Number(enteredNumber)) input.classList.add('margin-zero');
-}
+console.log(promise)
+promise
+.then(resolve => {
+    if (resolve === 1) {
+        console.log("Stay here")
+    } else {
+        console.log(`Go ${resolve} steps`)
+    } 
+})
+.catch(err => console.error('Exit'))
 
 // Task 2
 
-const newDiv = document.createElement('div')
-const newTag = document.createElement('h2');
-const startBtn = document.createElement('button')
-const stopBtn = document.createElement('button')
-startBtn.innerText = 'Start';
-stopBtn.innerText = 'Stop';
-
-document.forms[0].after(newDiv);
-newDiv.prepend(startBtn, stopBtn);
-newDiv.append(newTag)
-
-startBtn.addEventListener('click', () => {
-    Id = setInterval(timer, 1000);
-    return
-});
-stopBtn.addEventListener('click', () => {
-    clearInterval(Id);
-    return
-});
-    
-let timer = function() {
-    const time = document.querySelector('h2')
-    let date = new Date();
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
-    let seconds = date.getSeconds();
-
-    if (hours < 10) hours = '0' + hours;
-    if (minutes < 10) minutes = '0' + minutes;
-    if (seconds < 10) seconds = '0' + seconds;
-
-    time.textContent = hours + ':' + minutes + ':' + seconds;
-}
-
-// Task 3 
-
-function colorRed(){
-	const lastParagraph = document.body.querySelector('#main').lastElementChild;
-	lastParagraph.style.backgroundColor = 'red';
-	return
-}
-
-function footerDown(){
-	const footer = document.querySelector('#footer')
-	const wrapper = document.querySelector('#wrapper')
-	wrapper.append(footer)
-	return
-}
-
-colorRed()
-footerDown()
-
-
-// // Task 4
-
-const INGREDIENTS = {
-    "cocoa": ["cocoa powder", "milk", "sugar"],
-    "cappuccino": ["milk", "coffee"],
-    "smoothie": ["banana", "orange", "sugar"],
-    "matcha frappe": ["matcha", "milk", "ice"]
-    };
-    
-const menu = document.querySelector('#menu');
-menu.onclick = function(event) {
-    const orderedList = document.createElement('ol')
-    const recepie = INGREDIENTS[event.target.innerText];
-    if (recepie) {
-        recepie.forEach(element => {
-            let li = document.createElement('li');
-            li.innerText = element;
-            orderedList.append(li)
-        });
-
-        event.target.append(orderedList)
-    } else {
-        if (event.target.querySelector('ol')) event.target.querySelector('ol').remove()
+class PromiseError extends Error {
+    constructor(message, name) {
+      super(message);
+      this.name = name;
     }
+  }
+
+function goToShop() {
+    let foods = ['apple', 'pineapple', 'cherry','meat', 'chicken']
+    console.log(Promise.resolve(foods.length)) 
+    return Promise.resolve(foods.length)
 }
+
+function makeDinner() {
+    const promise2 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve('Bon appetit')
+            console.log('bonapetit')
+        }, 3000)
+    });
+    return promise2
+}
+
+goToShop()
+.then(res => {
+    if (res < 4) {
+        Promise.reject('Too low products')
+        .catch(err => console.error(new PromiseError(err, 'product error')))
+    } else {
+        return makeDinner()
+    }
+})
+.catch((err) => console.error(err))
+
+// Task 3
+
+function renderCards(...id) {
+    let characters = fetch(`https://rickandmortyapi.com/api/character/${id}`)
+    .then(
+    (res) => res.json()
+    )
+    .then((data) => {
+     render(data)
+    })
+    .catch((err) => console.log(err));
+   }
+   const render = (data) => {
+    let container = document.querySelector('.container');
+    container.innerHTML = "";
+    data.forEach((item) => {
+        let cardHTML = `<div class="card">
+           <div class="card-info">
+             <div class="title">
+               <h1>${item.name}</h1>
+               <div class="status">
+                <div class="live-status ${
+                   item.status === "Dead" ? "dead" : ""
+                 }"></div>
+                 <p>${item.status} - ${item.species} </p>
+               </div>
+             </div>
+             <div class="content">
+               <p>${item.location.name}</p>
+             </div>
+           </div>
+           <div class="card-image">
+             <img
+               src="${item.image}"
+               alt="Img"
+             />
+           </div>
+         </div>`;
+        container.insertAdjacentHTML("beforeend", cardHTML);
+      });
+   } 
+   const filter = (type) => fetch('https://rickandmortyapi.com/api/character' + `/${type}`)
+       .then((response) => response.json())
+       .then((data) => {
+           render(data.results)
+       });
+   let formContainer = document.querySelector('.form-container');
+   formContainer.addEventListener('click', (event) => {
+       let status = event.target.id
+       if (status === 'male' || status === 'female') {
+           let gender = '?gender=' + status
+           filter(gender)
+       }
+       if (status === 'alive' || status === 'dead') {
+           let isAlive = '?status=' + status
+           filter(isAlive)
+       }
+   })
+   renderCards(1, 2, 3, 4, 56, 78, 123, 358, 345, 213, 546, 234, 12, 34, 45, 65, 76, 87, 98, 21, 32, 34, 45, 60)
