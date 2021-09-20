@@ -1,0 +1,109 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+*,
+*::before, 
+*::after {
+    box-sizing: border-box;
+}
+
+.calendar-wrapper {
+    display: flex;
+}
+
+form{
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+}
+
+.scheduler {
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 250px;
+}
+
+.timezone {
+    height: 60px;
+    display: flex;
+    border-top: 1px solid gray;
+}
+
+.timezone__time{
+    font-size: 16px;
+    font-weight: 300;
+    color: gray;
+    position: relative;
+    width: calc(100% - 200px);
+    text-align: center;
+}
+
+.timezone__half {
+    font-size: 12px;
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.timezone__event {
+    width: 100%;
+    max-width: 200px;
+}
+.timezone__event .event{
+    width: 200px;
+}
+
+.event {
+    position: absolute;
+    background-color: #E2ECF5;
+    border-left: 2px solid #6E9ECF;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: all .3s linear;
+}
+
+.event-container {
+    position: absolute;
+    top:0px;
+    display: flex;
+    flex-direction: row-reverse;
+    width: 200px;
+}
+
+.event-container .event{
+    position: relative;
+}
+
+.event-btn {
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    transition: all .3s linear;
+}
+
+.event:hover {
+    background-color: #d1e1f0;
+}
+
+.event-btn:hover {
+    opacity: 1;
+}
+
+.changeColor{
+    width: 20px;
+    height: 20px;
+    opacity: 0;
+}
+
+.changeColor:hover {
+    opacity: 1;
+}
